@@ -1,0 +1,11 @@
+Distance,Traffic,Weather,Stock,Delay
+10,Low,Rain,Yes,No
+20,Medium,Clear,Yes,No
+50,High,Clear,No,Yes
+30,High,Rain,Yes,Yes
+15,Low,Rain,Yes,No
+60,High,Rain,No,Yes
+25,Medium,Clear,Yes,Yes
+40,High,Rain,No,Yes
+12,Low,Clear,Yes,No
+55,Medium,Clear,No,Yes

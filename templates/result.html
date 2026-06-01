@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Logistics Dashboard</title>
+
+    <style>
+        h2 {
+    margin-top: 0;
+}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;   /* prevents full page scroll */
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;   /* scroll only inside content */
+}
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5f5;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+}
+
+        .card {
+            background: white;
+    padding: 15px;   /* reduce from 20px */
+    border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        }
+
+.big {
+    grid-column: span 3;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+        .highlight {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .insight {
+            font-size: 14px;
+            color: #475569;
+            margin-top: 5px;
+        }
+
+        .error-box {
+            background:#fee2e2;
+            color:#991b1b;
+            padding:20px;
+            border-radius:10px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>🚀 Supply Chain</h2>
+    <a href="/">🏠 Dashboard</a>
+    <a href="/history">📊 Order History</a>
+    <a href="/add_warehouse"">➕ Add Warehouse</a>
+    <a href="/warehouses">📋 View Warehouses</a>
+</div>
+
+
+<div class="main">
+
+{% if error %}
+<div class="error-box">
+    <h2>⚠️ {{ error }}</h2>
+    <p>{{ suggestion }}</p>
+    <br>
+    <a href="/"><button>🔙 Try Again</button></a>
+</div>
+{% endif %}
+
+{% if not error %}
+
+<h2>📊 Smart Logistics Insights</h2>
+
+<div class="grid">
+
+<div class="card">
+    <h3>🏭 Warehouse</h3>
+    <p class="highlight">{{ warehouse }}</p>
+</div>
+
+<div class="card">
+    <h3>⏱ Delivery Time</h3>
+    <p class="highlight">{{ delivery_time }} hrs</p>
+    <p class="insight">Estimated based on distance + traffic + weather</p>
+</div>
+
+<div class="card">
+    <h3>💰 Cost</h3>
+    <p class="highlight">₹{{ cost }}</p>
+    <p class="insight">Calculated as ₹5/km transport cost</p>
+</div>
+
+<div class="card">
+    <h3>🤖 Prediction</h3>
+    <p>{{ prediction }}</p>
+    <p class="insight">Confidence: {{ confidence }}%</p>
+</div>
+
+<div class="card">
+    <h3>📊 Risk Level</h3>
+    <p class="highlight">{{ risk }}%</p>
+    <p class="insight">Higher due to traffic/weather/stock</p>
+</div>
+
+<div class="card">
+    <h3>📦 Status</h3>
+    <p>{{ status }}</p>
+</div>
+
+<div class="card">
+    <h3>🚦 Traffic</h3>
+    <p>{{ traffic }}</p>
+    <p class="insight">
+        {% if traffic == "High" %}
+        High congestion → increases delay risk
+        {% elif traffic == "Medium" %}
+        Moderate traffic → manageable delay
+        {% else %}
+        Smooth traffic → faster delivery
+        {% endif %}
+    </p>
+</div>
+
+<div class="card">
+    <h3>🌦 Weather</h3>
+    <p>{{ weather }}</p>
+    <p class="insight">
+        {% if weather == "Rain" %}
+        Rain may slow delivery and increase risk
+        {% else %}
+        Clear weather supports faster delivery
+        {% endif %}
+    </p>
+</div>
+
+<div class="card">
+    <h3>⚡ System Load</h3>
+    <p>{{ load }}</p>
+</div>
+
+<div class="card">
+    <h3>📦 Remaining Stock</h3>
+    <p>{{ remaining_stock }}</p>
+</div>
+
+<div class="card">
+    <h3>🎯 Priority</h3>
+    <p>{{ priority }}</p>
+</div>
+
+<div class="card big">
+    <h3>🔍 What-If Analysis</h3>
+    <p>High Traffic → {{ high_traffic_time }} hrs</p>
+    <p>Rain Condition → {{ rain_time }} hrs</p>
+    <p class="insight">Used for decision simulation</p>
+</div>
+
+<div class="card big">
+    <h3>🧠 AI Explanation</h3>
+    <p>{{ explanation }}</p>
+</div>
+
+<div class="card big">
+    <h3>💡 Recommendation</h3>
+    <p>{{ recommendation }}</p>
+</div>
+<div class="card big">
+    <h3>📍 Delivery Map</h3>
+<iframe
+    width="100%"
+    height="250"
+    style="border:0"
+    loading="lazy"
+    src="https://www.google.com/maps?q={{ warehouse }} to {{ city }}&output=embed">
+</iframe>
+</div>
+<div class="card">
+    <h3>📍 Route Info</h3>
+    <p>From: {{ warehouse }}</p>
+    <p>To: {{ city }}</p>
+    <p>Distance: {{ distance }} km</p>
+</div>
+<div class="card">
+    <h3>🚚 Route Efficiency</h3>
+    <p>{{ speed_info }}</p>
+</div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

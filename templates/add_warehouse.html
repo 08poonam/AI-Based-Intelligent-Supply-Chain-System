@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+      <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            background: #f1f5f9;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5f5;
+            padding: 10px;
+            text-decoration: none;
+            margin: 5px 0;
+            border-radius: 6px;
+        }
+
+        .sidebar a:hover {
+            background: #1e293b;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .navbar {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+    </style>
+
+<body>
+    <div class="sidebar">
+    <h2>🚀 Supply Chain</h2>
+    <a href="/">🏠 Dashboard</a>
+    <a href="/history">📊 Order History</a>
+    <a href="/add_warehouse"">➕ Add Warehouse</a>
+    <a href="/warehouses">📋 View Warehouses</a>
+</div>
+
+<div class="main">
+<h2>Add Warehouse</h2>
+<div class="card">
+<form method="POST">
+
+            <div class="form-group">
+                <label>Warehouse Name</label>
+                <input type="text" name="name" placeholder="Warehouse Name"  required>
+            </div>
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" placeholder="City" required>
+            </div>
+            <div class="form-group">
+                <label>Stock</label>
+                <input type="number" name="stock" placeholder="Stock" required>
+            </div>                        
+<button type="submit">➕ Add</button>
+</form>
+</div>
+</div>
+</body>
+</html>

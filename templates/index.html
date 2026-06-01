@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI-Based Intelligent Supply Chain System</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            background: #f1f5f9;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5f5;
+            padding: 10px;
+            text-decoration: none;
+            margin: 5px 0;
+            border-radius: 6px;
+        }
+
+        .sidebar a:hover {
+            background: #1e293b;
+        }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .navbar {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+/* Overlay */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 6, 23, 0.75);
+    backdrop-filter: blur(6px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Loader Card */
+.loader-card {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    color: white;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animated Ring */
+.loader-ring {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    border: 5px solid rgba(255,255,255,0.2);
+    border-top: 5px solid #3b82f6;
+    animation: spin 1s linear infinite;
+}
+
+/* Text */
+.loader-text {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.loader-subtext {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+/* Animations */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+    </style>
+</head>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.querySelector('form[action="/predict"]');
+    const loader = document.getElementById("loader");
+    const button = document.querySelector("button");
+
+    form.addEventListener("submit", function (e) {
+
+        // show loader immediately
+        loader.style.display = "flex";
+
+        // disable button to prevent double click
+        button.disabled = true;
+        button.innerText = "Running Simulation...";
+
+        // allow UI to render before Flask request
+        setTimeout(() => {
+            form.submit();
+        }, 100);
+
+        e.preventDefault();
+    });
+
+});
+</script>
+<body>
+<div id="loader">
+    <div class="loader-card">
+        <div class="loader-ring"></div>
+        <div class="loader-text">Running AI Simulation...</div>
+        <div class="loader-subtext">Optimizing supply chain routes</div>
+    </div>
+</div>
+
+<div class="sidebar">
+    <h2>🚀 Supply Chain</h2>
+    <a href="/">🏠 Dashboard</a>
+    <a href="/history">📊 Order History</a>
+    <a href="/add_warehouse"">➕ Add Warehouse</a>
+    <a href="/warehouses">📋 View Warehouses</a>
+</div>
+
+<div class="main">
+
+    <div class="navbar">
+        <h3>AI-Based Intelligent Supply Chain System</h3>
+    </div>
+
+    <div class="card">
+        <h2>📦 New Order</h2>
+
+        <form action="/predict" method="post">
+
+
+            <div class="form-group">
+                <label>Quantity</label>
+                <input type="number" name="quantity" required>
+            </div>
+
+            <div class="form-group">
+                <label>City</label>
+                <select name="city">
+                    <option>Mumbai</option>
+                    <option>Delhi</option>
+                    <option>Bangalore</option>
+                    <option>Pune</option>
+                    <option>Chennai</option>
+                    <option>Hyderabad</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Stock</label>
+                <select name="stock">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+
+            <button type="submit">🚀 Run Simulation</button>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
